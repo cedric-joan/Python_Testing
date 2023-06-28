@@ -31,11 +31,11 @@ def showSummary():
         return render_template('welcome.html',club=club,competitions=competitions)
     except IndexError:
         if request.form['email'] == "":
-            flash("please enter your email")
-            return render_template('index.html')
+            message = "please enter your email"
+            return render_template('index.html', message)
         else:
-            flash("No account related to this email")
-            return render_template('index.html')
+            message = "No account related to this email"
+            return render_template('index.html', message)
 
 @app.route('/book/<competition>/<club>')
 def book(competition,club):
