@@ -24,14 +24,14 @@ clubs = loadClubs()
 def index():
     return render_template('index.html')
 
-@app.route('/showSummary',methods=['POST'])
+@app.route('/showSummary', methods=['POST'])
 def showSummary():
     try:
         club = [club for club in clubs if club['email'] == request.form['email']][0]
-        return render_template('welcome.html',club=club,competitions=competitions)
+        return render_template('welcome.html',club=club,competitions=competitions), 200
     except IndexError:
         if request.form['email'] == " ":
-            return render_template('index.html')
+            return render_template('index.html'), 401
         else:
             status_code = 401
             return render_template('index.html', error_message="Please enter a valid email"), status_code
