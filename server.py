@@ -53,7 +53,6 @@ def purchasePlaces():
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
     placesCompetition = int(competition["numberOfPlaces"])
-    clubPoints = int(club["points"])
     if placesRequired <= 0:
         flash("Cannot be less than or equal to 0")
     elif placesRequired > 12:
