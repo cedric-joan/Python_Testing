@@ -53,22 +53,22 @@
     </table>
     <h3 class="text-center mt-5 mb-3">Old Competitions</h3>
     <table class="table table-striped table-light w-50 m-auto">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for comp in old_competitions %}
-            <tr>
-                <td>{{ comp["name"]}}</td>
-                <td>{{ comp["date"]}}</td>
-                <td>Booking closed</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for comp in old_competitions %}
+        <tr>
+          <td>{{ comp["name"]}}</td>
+          <td>{{ comp["date"]}}</td>
+          <td>Booking closed</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
   </body>
 </html>
