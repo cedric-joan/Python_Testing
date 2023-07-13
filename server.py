@@ -49,24 +49,28 @@ def book(competition,club):
 
 @app.route('/purchasePlaces',methods=['POST'])
 def purchasePlaces():
-    competition = [c for c in competitions if c['name'] == request.form['competition']][0]
-    club = [c for c in clubs if c['name'] == request.form['club']][0]
-    placesRequired = int(request.form['places'])
-    placesCompetition = int(competition["numberOfPlaces"])
-    clubPoints = int(club["points"])
-    if placesRequired <= 0:
-        flash("Cannot be less than or equal to 0")
-    elif placesRequired > 12:
-        flash("You may not reserve more than 12 places at a time.")
-    elif placesRequired > placesCompetition:
-        flash("Please note that you have selected more than the maximum number of places.")
-    elif clubPoints < placesRequired:
-        flash("You don't have enough points")
-    else:
-        competition['numberOfPlaces'] = placesCompetition - placesRequired
-        club['points'] = clubPoints - placesRequired
-        flash('Great-booking complete!')
-    return render_template('welcome.html', club=club, competitions=competitions), 200
+    try:
+        competition = [c for c in competitions if c['name'] == request.form['competition']][0]
+        club = [c for c in clubs if c['name'] == request.form['club']][0]
+        placesRequired = int(request.form['places'])
+        placesCompetition = int(competition["numberOfPlaces"])
+        clubPoints = int(club["points"])
+        if placesRequired <= 0:
+            flash("Cannot be less than or equal to 0")
+        elif placesRequired > 12:
+            flash("You may not reserve more than 12 places at a time.")
+        elif placesRequired > placesCompetition:
+            flash("Please note that you have selected more than the maximum number of places.")
+        elif clubPoints < placesRequired:
+            flash("You don't have enough points")
+        else:
+            competition['numberOfPlaces'] = placesCompetition - placesRequired
+            club['points'] = clubPoints - placesRequired
+            flash('Great-booking complete!')
+            return render_template('welcome.html', club=club, competitions=competitions), 200
+    except ValueError:
+        flash('Please enter a number between 0 and 12.')
+    return render_template('booking.html', club=club, competitions=competitions), 403
 
 def get_competition_club(competition_name, club_name):
     competition = [c for c in competitions if c['name'] == competition_name][0]
