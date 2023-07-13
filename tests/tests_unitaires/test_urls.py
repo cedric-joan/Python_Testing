@@ -1,5 +1,7 @@
 from Python_Testing.server import app
 
+
+
 class TestUrlsPath:
 
     client = app.test_client()
@@ -24,13 +26,13 @@ class TestUrlsPath:
 
     def test_wrong_url_booking_club(self):
         result = self.client.get('/book/SpringFestival/Simply%20Lift')
-        expected_result = 500
+        expected_result = 404
         assert result.status_code == expected_result
 
 
     def test_wrong_url_booking_competition(self):
         result = self.client.get('/book/Spring%20Festival/SimplyLift')
-        expected_result = 500
+        expected_result = 404
         assert result.status_code == expected_result
 
 
