@@ -10,12 +10,22 @@ def loadCompetitions():
     with open('competitions.json') as comps:
          listOfCompetitions = json.load(comps)['competitions']
          return listOfCompetitions
+    
+def init_club_bookings(list_of_clubs, list_of_competitions):
+    dict_bookings = {}
+    for club in list_of_clubs:
+        dict_bookings[club["name"]] = {}
+        for competition in list_of_competitions:
+            dict_bookings[club["name"]][competition["name"]] = 0
+
+    return dict_bookings
 
 app = Flask(__name__)
 app.secret_key = 'something_special'
 
 competitions = loadCompetitions()
 clubs = loadClubs()
+bookings = init_club_bookings(clubs, competitions)
 
 @app.route('/')
 def index():
@@ -76,6 +86,9 @@ def get_competition_club(competition_name, club_name):
     competition = [c for c in competitions if c['name'] == competition_name][0]
     club = [c for c in clubs if c['name'] == club_name][0]
     return competition, club
+
+def get_bookings(club_name, competition_name):
+    return bookings[club_name][competition_name]
 
 @app.route('/clubs')
 def view_club_points():
