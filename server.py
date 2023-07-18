@@ -80,7 +80,7 @@ def purchasePlaces():
             return render_template('welcome.html', club=club, competitions=competitions), 200
     except ValueError:
         flash('Please enter a number between 0 and 12.')
-    return render_template('booking.html', club=club, competitions=competitions), 403
+    return render_template('booking.html', club=club, competition=competition), 403
 
 def get_competition_club(competition_name, club_name):
     competition = [c for c in competitions if c['name'] == competition_name][0]
