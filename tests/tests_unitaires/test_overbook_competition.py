@@ -10,7 +10,6 @@ class TestPurchasePlaces:
     def test_purchase_places_zero(self):
         club = server.clubs[1]
         comp = server.competitions[1]
-
         result = client.post(
             "/purchasePlaces",
             data={
