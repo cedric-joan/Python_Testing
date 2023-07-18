@@ -4,13 +4,12 @@ from Python_Testing.server import app
 client = app.test_client()
 
 class TestPurchasePlaces:
-    expected_status_code = 200
+    expected_status_code = 403
 
     
     def test_purchase_places_zero(self):
         club = server.clubs[1]
         comp = server.competitions[1]
-
         result = client.post(
             "/purchasePlaces",
             data={
