@@ -1,5 +1,4 @@
 import pytest
-# import server
 from Python_Testing.server import app, init_club_bookings
 
 app.config['TESTING'] = True
