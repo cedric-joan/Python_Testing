@@ -6,7 +6,6 @@ client = app.test_client()
 class TestPurchasePlaces:
     expected_status_code = 403
 
-    
     def test_purchase_places_zero(self):
         club = server.clubs[1]
         comp = server.competitions[1]
