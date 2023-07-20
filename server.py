@@ -40,8 +40,7 @@ def showSummary():
         if request.form['email'] == " ":
             return render_template('index.html'), 401
         else:
-            status_code = 401
-            return render_template('index.html', error_message="Please enter a valid email"), status_code
+            return render_template('index.html', error_message="Please enter a valid email"), 401
 
 @app.route('/book/<competition>/<club>')
 def book(competition,club):
