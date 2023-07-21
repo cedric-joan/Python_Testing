@@ -4,11 +4,11 @@ from Python_Testing.server import app
 client = app.test_client()
 
 class TestPurchasePlaces:
-    expected_status_code = 403
 
     def test_purchase_places_zero(self):
         club = server.clubs[1]
         comp = server.competitions[1]
+        self.expected_status_code = 403
         result = client.post(
             "/purchasePlaces",
             data={
@@ -24,6 +24,7 @@ class TestPurchasePlaces:
     def test_purchase_places_over_12(self):
         club = server.clubs[0]
         comp = server.competitions[0]
+        self.expected_status_code = 200
         result = client.post("/purchasePlaces",
             data={
                 "competition": comp["name"],
@@ -37,6 +38,7 @@ class TestPurchasePlaces:
     def test_purchase_places_over_places_comp(self):
         club = server.clubs[0]
         competition = server.competitions[1]
+        self.expected_status_code = 200
         result = client.post(
             "/purchasePlaces",
             data={
@@ -51,6 +53,7 @@ class TestPurchasePlaces:
     def test_purchase_places_not_enought_club_points(self):
         competition = server.competitions[1]
         club = server.clubs[1]
+        self.expected_status_code = 403
         result = client.post(
             "/purchasePlaces",
             data={
@@ -65,6 +68,7 @@ class TestPurchasePlaces:
     def test_purchase_places_pts_club_nominal(self):
         competition = server.competitions[1]
         club = server.clubs[2]
+        self.expected_status_code = 200
         result = client.post(
             "/purchasePlaces",
             data={
