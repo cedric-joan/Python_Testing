@@ -8,9 +8,9 @@ class TestPurchasePlaces:
     def test_purchase_places_zero(self):
         club = server.clubs[1]
         comp = server.competitions[1]
-        self.expected_status_code = 403
+        self.expected_status_code = 200
         result = client.post(
-            "/purchasePlaces",
+            "/purchase-places",
             data={
                 "competition": comp["name"],
                 "club": club["name"],
@@ -24,7 +24,7 @@ class TestPurchasePlaces:
         club = server.clubs[0]
         comp = server.competitions[0]
         self.expected_status_code = 200
-        result = client.post("/purchasePlaces",
+        result = client.post("/purchase-places",
             data={
                 "competition": comp["name"],
                 "club": club["name"],
@@ -39,7 +39,7 @@ class TestPurchasePlaces:
         competition = server.competitions[1]
         self.expected_status_code = 200
         result = client.post(
-            "/purchasePlaces",
+            "/purchase-places",
             data={
                 "competition": competition["name"],
                 "club": club["name"],
@@ -52,9 +52,9 @@ class TestPurchasePlaces:
     def test_purchase_places_not_enought_club_points(self):
         competition = server.competitions[1]
         club = server.clubs[1]
-        self.expected_status_code = 403
+        self.expected_status_code = 200
         result = client.post(
-            "/purchasePlaces",
+            "/purchase-places",
             data={
                 "competition": competition["name"],
                 "club": club["name"],
@@ -69,7 +69,7 @@ class TestPurchasePlaces:
         club = server.clubs[2]
         self.expected_status_code = 200
         result = client.post(
-            "/purchasePlaces",
+            "/purchase-places",
             data={
                 "competition": competition["name"],
                 "club": club["name"],

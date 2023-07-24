@@ -68,6 +68,7 @@ def purchase_places():
         return render_template('welcome.html', club=club, competitions=competitions)
     elif placesRequired > 12:
         flash("You may not reserve more than 12 places at a time.")
+        return render_template('welcome.html', club=club, competitions=competitions)
     elif placesRequired > placesCompetition:
         flash("Please note that you have selected more than the maximum number of places.")
         return render_template('welcome.html', club=club, competitions=competitions)
