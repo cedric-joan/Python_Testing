@@ -31,7 +31,7 @@ bookings = init_club_bookings(clubs, competitions)
 def index():
     return render_template('index.html'), 200
 
-@app.route('/showSummary', methods=['POST'])
+@app.route('/show-summary', methods=['POST'])
 def showSummary():
     try:
         club = [club for club in clubs if club['email'] == request.form['email']][0]
@@ -56,7 +56,7 @@ def book(competition,club):
         flash("Something went wrong-please try again")
     return render_template('welcome.html', club=club, competitions=competitions), 404
 
-@app.route('/purchasePlaces',methods=['POST'])
+@app.route('/purchase-places',methods=['POST'])
 def purchasePlaces():
         competition = [c for c in competitions if c['name'] == request.form['competition']][0]
         club = [c for c in clubs if c['name'] == request.form['club']][0]
