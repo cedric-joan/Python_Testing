@@ -49,6 +49,12 @@ Pour effectuer l'ensemble des tests unitaires, entrer la commande :
 pytest tests/
 ````
 
+Pour effectuer une couverture des tests, entrer la commande :
+
+````Bash
+pytest --cov=tests/
+````
+
 ## Test de performances
 Il est possible d'effectuer un test de performance grâce au module Locust. 
 Pour lancer le serveur de test, entrer la commande :
