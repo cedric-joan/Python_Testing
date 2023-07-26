@@ -3,6 +3,7 @@ from Python_Testing.server import app
 
 client = app.test_client()
 
+
 class TestPurchasePlaces:
 
     def test_purchase_places_zero(self):
@@ -24,7 +25,8 @@ class TestPurchasePlaces:
         club = server.clubs[0]
         comp = server.competitions[0]
         self.expected_status_code = 200
-        result = client.post("/purchase-places",
+        result = client.post(
+            "/purchase-places",
             data={
                 "competition": comp["name"],
                 "club": club["name"],
@@ -32,7 +34,6 @@ class TestPurchasePlaces:
             },
         )
         assert result.status_code == self.expected_status_code
-
 
     def test_purchase_places_over_places_comp(self):
         club = server.clubs[0]
@@ -48,7 +49,6 @@ class TestPurchasePlaces:
         )
         assert result.status_code == self.expected_status_code
 
-
     def test_purchase_places_not_enought_club_points(self):
         competition = server.competitions[1]
         club = server.clubs[1]
@@ -62,7 +62,6 @@ class TestPurchasePlaces:
             },
         )
         assert result.status_code == self.expected_status_code
-
 
     def test_purchase_places_pts_club_nominal(self):
         competition = server.competitions[1]

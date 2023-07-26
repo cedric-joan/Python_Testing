@@ -1,5 +1,4 @@
 import pytest
-# import server
 from Python_Testing.server import app, init_club_bookings
 
 app.config['TESTING'] = True
@@ -9,19 +8,20 @@ app.config['TESTING'] = True
 def clubs():
     clubs = [
         {
-        "name":"Simply Lift",
-        "email":"john@simplylift.co",
-        "points":"13"
-    },
-    {
-        "name":"Iron Temple",
-        "email": "admin@irontemple.com",
-        "points":"4"
-    },
-    {   "name":"She Lifts",
-        "email": "kate@shelifts.co.uk",
-        "points":"12"
-    }
+            "name": "Simply Lift",
+            "email": "john@simplylift.co",
+            "points": "13"
+        },
+        {
+            "name": "Iron Temple",
+            "email": "admin@irontemple.com",
+            "points": "4"
+        },
+        {
+            "name": "She Lifts",
+            "email": "kate@shelifts.co.uk",
+            "points": "12"
+        }
     ]
     return clubs
 
