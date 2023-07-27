@@ -18,7 +18,7 @@ class TestUrlsPath:
 
     def test_url_logout(self):
         result = self.client.get('/logout')
-        assert result.status_code == 200
+        assert result.status_code == 301
 
     def test_wrong_url_booking_club(self):
         result = self.client.get('/book/SpringFestival/Simply%20Lift')

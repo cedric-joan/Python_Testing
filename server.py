@@ -108,4 +108,4 @@ def view_club_points():
 
 @app.route('/logout')
 def logout():
-    return redirect(url_for('index')), 200
+    return redirect(url_for('index')), 301
