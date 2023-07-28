@@ -1,6 +1,8 @@
 import json
+from datetime import datetime
+
 from flask import Flask, render_template, request, redirect, flash, url_for
-from app import update_places, list_places_booked
+from Python_Testing.conf_app import update_places, list_places_booked, sorted_competitions
 
 def load_clubs():
     with open('clubs.json') as c:
@@ -31,6 +33,7 @@ competitions = load_competitions()
 clubs = load_clubs()
 bookings = init_club_bookings(clubs, competitions)
 places_booked = list_places_booked(competitions, clubs)
+old_competitions, new_competitions = sorted_competitions(competitions)
 
 
 @app.route('/')
@@ -55,14 +58,13 @@ def book(competition, club):
     try:
         found_club = [c for c in clubs if c['name'] == club][0]
         found_competition = [c for c in competitions if c['name'] == competition][0]
-        if found_club and found_competition:
-            return render_template('booking.html', club=found_club, competition=found_competition), 200
+        if datetime.strptime(found_competition['date'], '%Y-%m-%d %H:%M:%S') < datetime.now():
+            flash("this competition is over.")
         else:
-            flash("Something went wrong-please try again")
-            return render_template('welcome.html', club=club, competitions=competitions), 400
+            return render_template('booking.html', club=found_club, competition=found_competition), 200
     except IndexError:
         flash("Something went wrong-please try again")
-    return render_template('welcome.html', club=club, competitions=competitions), 404
+    return render_template('welcome.html', club=club, old_competitions=old_competitions, new_competitions=new_competitions), 404
 
 
 @app.route('/purchase-places', methods=['POST'])

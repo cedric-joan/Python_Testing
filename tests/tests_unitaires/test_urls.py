@@ -39,5 +39,5 @@ class TestUrlsPath:
         assert result.status_code == 404
 
     def test_good_url_booking(self):
-        result = self.client.get('/book/Spring%20Festival/Simply%20Lift')
+        result = self.client.get('/book/New%20Games/Simply%20Lift')
         assert result.status_code == 200

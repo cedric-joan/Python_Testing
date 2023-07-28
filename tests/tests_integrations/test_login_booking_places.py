@@ -12,7 +12,7 @@ def test_login_route(clubs, competitions):
     assert result.status_code == 200
     assert b'Welcome, admin@irontemple.com' in result.data
 
-    result = client.get('/book/Spring%20Festival/Iron%20Temple')
+    result = client.get('/book/New%20Games/Iron%20Temple')
     assert result.status_code == 200
     assert b'How many places?' in result.data
 
@@ -32,4 +32,4 @@ def test_login_route(clubs, competitions):
     assert result == expected_value
 
     result = client.get('/logout', data={'email': 'admin@irontemple.com'})
-    assert result.status_code == 200
+    assert result.status_code == 301

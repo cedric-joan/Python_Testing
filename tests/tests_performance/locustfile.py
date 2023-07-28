@@ -16,12 +16,11 @@ class ProjectPerfTest(HttpUser):
 
     @task
     def booking(self):
-        self.client.get("/book/Fall Classic/Simply Lift")
-        self.client.get("/book/Spring Festival/Iron Temple")
+        self.client.get("/book/New Games/Simply Lift")
 
     @task
     def purchase_place(self):
-        self.client.post("/purchase-places", {"club": "Simply Lift", "competition": "Fall Classic", "places": 4})
+        self.client.post("/purchase-places", {"club": "Simply Lift", "competition": "New Games", "places": 4})
 
     @task
     def logout(self):

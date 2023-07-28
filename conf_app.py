@@ -1,3 +1,5 @@
+from datetime import datetime
+
 
 def list_places_booked(competitions, clubs):
     places_booked = []
@@ -16,3 +18,15 @@ def update_places(competition, club, places_booked, places_required):
                 else:
                     raise ValueError("You can't book more than 12 places in a competition.")
     return places_booked
+
+def sorted_competitions(comps):
+    finished_competitions = []
+    new_competitions = []
+    for info in comps:
+        info_date = datetime.strptime(info['date'], '%Y-%m-%d %H:%M:%S')
+        if info_date < datetime.now():
+            finished_competitions.append(info)
+        else:
+            new_competitions.append(info)
+
+    return finished_competitions, new_competitions
