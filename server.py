@@ -1,6 +1,6 @@
 import json
 from flask import Flask, render_template, request, redirect, flash, url_for
-
+from app import update_places, list_places_booked
 
 def load_clubs():
     with open('clubs.json') as c:
@@ -30,6 +30,7 @@ app.secret_key = 'something_special'
 competitions = load_competitions()
 clubs = load_clubs()
 bookings = init_club_bookings(clubs, competitions)
+places_booked = list_places_booked(competitions, clubs)
 
 
 @app.route('/')
@@ -84,11 +85,16 @@ def purchase_places():
         flash("You don't have enough points")
         return render_template('welcome.html', club=club, competitions=competitions)
     else:
-        competition['numberOfPlaces'] = places_competition - places_required
-        club['points'] = club_points - places_required
-        flash('Great-booking complete!')
-        return render_template('welcome.html', club=club, competitions=competitions), 200
+        try:
+            update_places(competition, club, places_booked, places_required)
+            competition['numberOfPlaces'] = places_competition - places_required
+            club['points'] = club_points - places_required
+            flash('Great-booking complete!')
+            return render_template('welcome.html', club=club, competitions=competitions), 200
+        except ValueError:
+            flash('You may not reserve more than 12 places at a time.')
 
+    return render_template('welcome.html', club=club, competition=competition)
 
 def get_competition_club(competition_name, club_name):
     competition = [c for c in competitions if c['name'] == competition_name][0]
